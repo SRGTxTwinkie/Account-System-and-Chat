@@ -6,7 +6,7 @@ class ID
   end
 end
 
-class Dashboard < ID
+class Message < ID
   attr_accessor :messages
 def initialize(messages)
   @messages = array.new
@@ -15,6 +15,9 @@ end
 
 $main = true
 $ids = []
+$posts = []
+$usernames = []
+
 $ids.append(ID.new("admin", "admin"))
 
 def Main()
@@ -39,6 +42,8 @@ end
 def LoginUser()
   print "Username: "
   userName = gets().chomp
+  $usernames = []
+  $usernames.append(userName)
   $ids.each do |i|
     next if userName != i.username
       LoginPass()
@@ -58,7 +63,7 @@ end
 
 def Dashboard
   x = ""
-  until x == 3
+  until x == "3"
     puts "What would you like to do?"
     puts "1:) New Post"
     puts "2:) View Posts"
@@ -67,22 +72,28 @@ def Dashboard
     print "What will you do?: "
     x = gets.chomp()
     if x == "1"
+      PostMaker()
       puts
-      MakePost()
+      puts "Post has been made!"
+      puts
     elsif x == "2"
       puts
       PostVeiwer()
+      puts
     end
   end
+  $posts = []
   Main()
 end
 
 def PostVeiwer
-  puts "Not implemented yet"
+  $posts.each do |i|
+    print $usernames.to_s + " :" + i.to_s + "\n"
+  end
 end
 
-def MakePost
-  puts "Not implemented yet"
+def PostMaker
+  $posts.append(gets.chomp())
 end
 
 def Username
