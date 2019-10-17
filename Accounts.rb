@@ -6,10 +6,11 @@ class ID
   end
 end
 
-class Message < ID
-  attr_accessor :messages
-def initialize(messages)
-  @messages = array.new
+class Message
+  attr_accessor :post, :username
+def initialize(post)
+  @username = $currentUser
+  @post = post
 end
 end
 
@@ -17,6 +18,7 @@ $main = true
 $ids = []
 $posts = []
 $usernames = []
+$currentUser = ""
 
 $ids.append(ID.new("admin", "admin"))
 
@@ -42,8 +44,8 @@ end
 def LoginUser()
   print "Username: "
   userName = gets().chomp
-  $usernames = []
   $usernames.append(userName)
+  $currentUser = userName
   $ids.each do |i|
     next if userName != i.username
       LoginPass()
@@ -82,18 +84,19 @@ def Dashboard
       puts
     end
   end
-  $posts = []
   Main()
 end
 
 def PostVeiwer
   $posts.each do |i|
-    print $usernames.to_s + " :" + i.to_s + "\n"
+    if i.username == $currentUser
+      print i.post
+    end
   end
 end
 
 def PostMaker
-  $posts.append(gets.chomp())
+  $posts.append(Message.new(gets.chomp()))
 end
 
 def Username
