@@ -37,16 +37,17 @@ def Main()
 end
 
 def LoginUser()
+  print "Username: "
   userName = gets().chomp
   $ids.each do |i|
     next if userName != i.username
-      print("Password: ")
       LoginPass()
   end
   print "That user wasn't found \n"
 end
 
 def LoginPass
+  print "Password: "
   userPass = gets().chomp
   $ids.each do |i|
     next if userPass != i.password
@@ -65,15 +66,23 @@ def Dashboard
     puts
     print "What will you do?: "
     x = gets.chomp()
-    if x == 1
+    if x == "1"
+      puts
       MakePost()
+    elsif x == "2"
+      puts
+      PostVeiwer()
     end
   end
   Main()
 end
 
+def PostVeiwer
+  puts "Not implemented yet"
+end
+
 def MakePost
-  puts "Not implemented yet the "
+  puts "Not implemented yet"
 end
 
 def Username
