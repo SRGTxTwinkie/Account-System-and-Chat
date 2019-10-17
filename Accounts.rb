@@ -67,11 +67,12 @@ end
 
 def Dashboard
   x = ""
-  until x == "3"
+  until x == "4"
     puts "What would you like to do?"
     puts "1:) New Post"
     puts "2:) View Posts"
-    puts "3:) Logout"
+    puts "3:) All Posts"
+    puts "4:) Logout"
     puts
     print "What will you do?: "
     x = gets.chomp()
@@ -84,9 +85,26 @@ def Dashboard
       puts
       PostVeiwer()
       puts
+    elsif x == "3"
+      AllPosts()
     end
   end
   Main()
+end
+
+def AllPosts
+  puts
+  puts
+  puts
+
+  $posts.each do |i|
+    print i.username + ": " + i.post + "\n"
+    puts
+  end
+
+  puts
+  puts
+  puts
 end
 
 def PostVeiwer
