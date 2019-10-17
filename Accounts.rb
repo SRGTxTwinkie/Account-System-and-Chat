@@ -17,7 +17,7 @@ end
 $main = true
 $ids = []
 $posts = []
-$usernames = []
+$usernames = ["admin"]
 $currentUser = ""
 
 $ids.append(ID.new("admin", "admin"))
@@ -45,7 +45,6 @@ def LoginUser()
   puts
   print "Username: "
   userName = gets().chomp
-  $usernames.append(userName)
   $currentUser = userName
   $ids.each do |i|
     next if userName != i.username
@@ -132,9 +131,16 @@ def Username
     puts tryUsername
     print "[Y/N]: "
     conf = gets.chomp()
-    return tryUsername
   end
+  puts tryUsername
   if conf.upcase == "Y"
+    if $usernames.include?(tryUsername)
+      puts "Sorry, that usernames is taken"
+      Username()
+    else
+      $usernames.append(tryUsername)
+      return tryUsername
+    end
   elsif conf.upcase == "N"
     puts "Please re-type your Username"
     puts
