@@ -42,6 +42,7 @@ def Main()
 end
 
 def LoginUser()
+  puts
   print "Username: "
   userName = gets().chomp
   $usernames.append(userName)
@@ -58,6 +59,7 @@ def LoginPass
   userPass = gets().chomp
   $ids.each do |i|
     next if userPass != i.password
+    puts
     Dashboard()
   end
   print "That user wasn't found \n"
@@ -88,14 +90,18 @@ def Dashboard
 end
 
 def PostVeiwer
+  puts
   $posts.each do |i|
     if i.username == $currentUser
-      print i.post
+      print i.post + "\n"
     end
   end
+  puts
 end
 
 def PostMaker
+  puts
+  print "Your message here: "
   $posts.append(Message.new(gets.chomp()))
 end
 
