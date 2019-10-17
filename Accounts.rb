@@ -117,9 +117,10 @@ def PostVeiwer
 end
 
 def PostMaker
+  t = Time.new
   puts
   print "Your message here: "
-  $posts.append(Message.new(gets.chomp()))
+  $posts.append(Message.new(gets.chomp() + " - [" + t.hour.to_s + ":" + t.min.to_s + "]"))
 end
 
 def Username
