@@ -9,22 +9,29 @@ class CreateUser
   def userCreate(allUsers)
     puts "Please create a new Username"
     print "Username: "
-    username = conf(gets.chomp)
-    for i in allUsers
-      if i.username == username
-        puts "That username has already been taken"
-        userCreate()
-      else
-        next
+    username = gets.chomp
+    until conf(username, allUsers) == 1
+      print "Username: "
+      username = gets.chomp
+      for i in allUsers
+        if i.username == username
+          puts "That username has already been taken"
+        else
+          next
+        end
       end
     end
     puts "Please create a new Password"
     print "Password: "
-    password = conf(gets.chomp)
-    userConf(username, password)
+    password = gets.chomp
+    until conf(password, allUsers) == 1
+      print "Password: "
+      password = gets.chomp
+    end
+    userConf(username, password, allUsers)
   end
 
-  def userConf(user, pass)
+  def userConf(user, pass, allUsers)
     system("cls")
     puts "Does this look right to you?"
     puts "Username: \"#{user}\""
@@ -34,26 +41,26 @@ class CreateUser
     if temp == "Y"
       return user, pass
     elsif temp == "N"
-      userCreate()
+      return 0
     else
       puts "Command not recognised"
       userConf(user,pass)
     end
   end
 
-  def conf(value)
+  def conf(value, allUsers)
     system("cls")
     puts "Does this look right: \"#{value}\" "
     print "[Y/N]: "
     conf = gets.chomp
     case conf.upcase
     when "Y"
-      return value
+      return 1
     when "N"
-      userCreate()
+      return 0
     else
       puts "Please select a given option"
-      conf(value)
+      conf(value, allUsers)
     end
   end
 end

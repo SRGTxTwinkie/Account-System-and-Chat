@@ -10,8 +10,8 @@ class UserLogin
     user = gets.chomp
     for i in allUsers
       if i.username == user
-        userPassGet(allUsers)
-        next
+        userPassGet(i)
+        return i
       else
         next
       end
@@ -20,16 +20,14 @@ class UserLogin
     end
   end
 
-    def userPassGet(allUsers)
-      puts "Please enter your password"
-      pass = gets.chomp
-      for i in allUsers
-        if i.password == pass
-          puts "You are now logged in"
-          return pass
-        else
-          next
-        end
-      end
+  def userPassGet(user)
+    puts "Please enter your password"
+    pass = gets.chomp
+    if user.password == pass
+      return
+    else
+      puts "Password not recognised"
     end
+  end
+
 end

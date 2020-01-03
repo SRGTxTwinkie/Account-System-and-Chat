@@ -1,8 +1,9 @@
 class UserClass
 
-  attr_accessor :username, :password, :arrayLoc
+  attr_accessor :username, :password, :arrayLoc, :messages
 
   def initialize(username, password, arrayLoc)
+    @messages = []
     @username = username
     @password = password
     @arrayLoc = arrayLoc
@@ -42,6 +43,11 @@ class UserClass
       puts "Please select a given option"
       conf(value)
     end
+  end
+
+  def newMessage(message, time)
+    fullMessage = "[#{time}]: #{message}"
+    @messages.append(fullMessage)
   end
 
 end

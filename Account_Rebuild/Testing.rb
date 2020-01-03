@@ -1,10 +1,4 @@
-$stdout.sync = true
-
-def cClear
-  print "                                                                    \r"
-end
-
-print "Hello there \r"
-sleep(3)
-cClear()
-print "F \r"
+require 'time'
+time = Time.new
+puts time.strftime("%d/%m/%Y")
+puts time.strftime("%k:%M")

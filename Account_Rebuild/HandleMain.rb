@@ -2,6 +2,7 @@ require_relative "UserClass.rb"
 require_relative "UserLogin.rb"
 require_relative "CreateUser.rb"
 require_relative "UserClass.rb"
+require_relative "ChatRoom.rb"
 
 class Main
   def initialize()
@@ -9,6 +10,7 @@ class Main
     @allUsers = [UserClass.new("1402","admin", 0)]
     @createUser = CreateUser.new()
     @userLogin = UserLogin.new()
+    @chatRoom = ChatRoom.new()
     @selected_user = nil
     main()
   end
@@ -19,11 +21,14 @@ class Main
     print "[Y/N]: "
     ans = gets.chomp
     if ans.upcase == "Y"
-      password = @userLogin.userNameGet(@allUsers)
-      puts password
+      currentUser = @userLogin.userNameGet(@allUsers)
+      @chatRoom.newUser(currentUser)
       system("pause")
     elsif ans.upcase == "N"
-      temp = @createUser.userCreate(@allUsers)
+      temp = 0
+      until temp != 0
+        temp = @createUser.userCreate(@allUsers)
+      end
       @allUsers.append(UserClass.new(temp[0],temp[1],@allUsers.count))
     elsif ans.upcase == "MENU"
       menu()
